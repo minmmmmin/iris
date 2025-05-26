@@ -1,9 +1,10 @@
+import * as d3 from "d3";
+
 function App() {
-  return (
-    <div>
-      <h1>Hello, World!</h1>
-    </div>
-  );
+  const scale = d3.scaleLinear();
+  scale.domain([100, 500]);
+  scale.range([10, 350]);
+  console.log(scale(100));
 }
 
 export default App;
