@@ -5,6 +5,8 @@ function App() {
   scale.domain([100, 500]);
   scale.range([10, 350]);
   console.log(scale(100));
+  console.log(scale(300));
+  console.log(scale(500));
 }
 
 export default App;
