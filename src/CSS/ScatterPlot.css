@@ -2,3 +2,8 @@
   transition: all 0.5s ease;
   opacity: 0.8;
 }
+
+.button.has-focused-border {
+  border: 2px solid #3273dc !important;
+  box-shadow: 0 0 0 1px rgba(50, 115, 220, 0.25);
+}
