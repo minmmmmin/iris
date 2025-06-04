@@ -101,6 +101,7 @@ export default function ScatterPlot() {
             .map((d) => (
               <circle
                 key={`${d.species}-${d.sepalLength}-${d.sepalWidth}-${d.petalLength}-${d.petalWidth}`}
+                className="scatter-dot"
                 cx={xScale(d[xKey])}
                 cy={yScale(d[yKey])}
                 r={5}
