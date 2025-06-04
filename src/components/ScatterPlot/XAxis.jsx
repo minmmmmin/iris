@@ -8,6 +8,10 @@ export default function XAxis({ scale, height, label, transform }) {
   useEffect(() => {
     const axis = axisBottom(scale).ticks(10);
     select(axisRef.current).call(axis);
+    select(axisRef.current)
+      .selectAll("text")
+      .style("font-size", "12px")
+      .style("font-weight", "bold");
   }, [scale]);
 
   return (

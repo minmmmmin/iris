@@ -5,10 +5,14 @@ import { select } from "d3-selection";
 export default function YAxis({ scale, label, transform }) {
   const axisRef = useRef();
 
-  useEffect(() => {
-    const axis = axisLeft(scale).ticks(10);
-    select(axisRef.current).call(axis);
-  }, [scale]);
+useEffect(() => {
+  const axis = axisLeft(scale).ticks(10);
+  select(axisRef.current).call(axis);
+  select(axisRef.current)
+    .selectAll("text")
+    .style("font-size", "12px")
+    .style("font-weight", "bold");
+}, [scale]);
 
   return (
     <g ref={axisRef} transform={transform}>
