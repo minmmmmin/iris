@@ -4,7 +4,6 @@ import { fetchIris } from "../../api";
 import AxisSelector from "./AxisSelector";
 import Legend from "./Legend";
 
-
 const width = 500;
 const height = 500;
 const padding = 40;
@@ -48,10 +47,19 @@ export default function ScatterPlot() {
   return (
     <div>
       <div style={{ display: "flex", gap: "2rem", marginBottom: "1rem" }}>
-        <AxisSelector axisLabel="x property" selected={xLabel} setSelected={setXLabel} />
-        <AxisSelector axisLabel="y property" selected={yLabel} setSelected={setYLabel} />
+        <AxisSelector
+          axisLabel="x property"
+          selected={xLabel}
+          setSelected={setXLabel}
+        />
+        <AxisSelector
+          axisLabel="y property"
+          selected={yLabel}
+          setSelected={setYLabel}
+        />
       </div>
 
+      <div style={{ display: "flex" }}></div>
       <svg width={width} height={height} style={{ background: "#f9f9f9" }}>
         {data.map((d, i) => (
           <circle
@@ -64,7 +72,10 @@ export default function ScatterPlot() {
           />
         ))}
       </svg>
-      <Legend />
+      <div
+        style={{ marginLeft: "1rem", display: "flex", alignItems: "center" }}>
+        <Legend />
+      </div>
     </div>
   );
 }
