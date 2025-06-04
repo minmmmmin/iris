@@ -6,7 +6,7 @@ export default function XAxis({ scale, height, label, transform }) {
   const axisRef = useRef();
 
   useEffect(() => {
-    const axis = axisBottom(scale).ticks(5);
+    const axis = axisBottom(scale).ticks(10);
     select(axisRef.current).call(axis);
   }, [scale]);
 

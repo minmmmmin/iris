@@ -6,7 +6,7 @@ export default function YAxis({ scale, label, transform }) {
   const axisRef = useRef();
 
   useEffect(() => {
-    const axis = axisLeft(scale).ticks(5);
+    const axis = axisLeft(scale).ticks(10);
     select(axisRef.current).call(axis);
   }, [scale]);
 
