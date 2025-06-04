@@ -61,7 +61,14 @@ export default function ScatterPlot() {
 
   return (
     <div>
-      <div style={{ display: "flex", gap: "2rem", marginBottom: "1rem" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "2rem",
+          marginBottom: "1rem",
+          marginLeft: "30px",
+        }}
+      >
         <AxisSelector
           axisLabel="x property"
           selected={xLabel}
