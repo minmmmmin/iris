@@ -98,16 +98,16 @@ export default function ScatterPlot() {
         >
           {data
             .filter((d) => visibleSpecies[d.species])
-            .map((d, i) => (
+            .map((d) => (
               <circle
-                key={i}
-                className="scatter-dot"
+                key={`${d.species}-${d.sepalLength}-${d.sepalWidth}-${d.petalLength}-${d.petalWidth}`}
                 cx={xScale(d[xKey])}
                 cy={yScale(d[yKey])}
                 r={5}
                 fill={colors[d.species]}
               />
             ))}
+
           <XAxis
             scale={xScale}
             height={height}
