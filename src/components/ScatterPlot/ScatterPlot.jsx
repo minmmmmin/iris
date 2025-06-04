@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { scaleLinear } from "d3-scale";
 import { fetchIris } from "../../api";
 import AxisSelector from "./AxisSelector";
+import Legend from "./Legend";
+
 
 const width = 500;
 const height = 500;
@@ -62,6 +64,7 @@ export default function ScatterPlot() {
           />
         ))}
       </svg>
+      <Legend />
     </div>
   );
 }
