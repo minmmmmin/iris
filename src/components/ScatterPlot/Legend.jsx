@@ -18,10 +18,16 @@ export default function Legend({ visibleSpecies, toggleSpecies, colors }) {
               height: 16,
               backgroundColor: colors[species],
               marginRight: 8,
-              border: "1px solid #333",
+              border: "none",
             }}
           />
-          <span>{species}</span>
+          <span
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            {species}
+          </span>
         </div>
       ))}
     </div>
