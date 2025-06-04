@@ -12,9 +12,9 @@ const height = 540;
 const padding = 60;
 
 const colors = {
-  setosa: "#1f77b4",
-  versicolor: "#ff7f0e",
-  virginica: "#2ca02c",
+  setosa: "#ff6f91", // ピンクっぽい赤
+  versicolor: "#fcbf49", // 明るいオレンジイエロー
+  virginica: "#3da4ab", // 明るい青緑
 };
 
 const labelToKey = {
@@ -88,7 +88,7 @@ export default function ScatterPlot() {
         width={width}
         height={height}
         style={{
-          background: "", // 中央寄せ！
+          background: "",
         }}
       >
         {data

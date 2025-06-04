@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Legend({ visibleSpecies, toggleSpecies, colors }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -21,7 +19,6 @@ export default function Legend({ visibleSpecies, toggleSpecies, colors }) {
               backgroundColor: colors[species],
               marginRight: 8,
               border: "1px solid #333",
-              borderRadius: "50%",
             }}
           />
           <span>{species}</span>
