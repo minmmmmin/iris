@@ -28,6 +28,19 @@ export default function ScatterPlot() {
   const [xLabel, setXLabel] = useState("sepal length");
   const [yLabel, setYLabel] = useState("sepal width");
 
+  const [visibleSpecies, setVisibleSpecies] = useState({
+    setosa: true,
+    versicolor: true,
+    virginica: true,
+  });
+
+  const toggleSpecies = (species) => {
+    setVisibleSpecies((prev) => ({
+      ...prev,
+      [species]: !prev[species],
+    }));
+  };
+
   const xKey = labelToKey[xLabel];
   const yKey = labelToKey[yLabel];
 
@@ -64,16 +77,18 @@ export default function ScatterPlot() {
       <div style={{ display: "flex" }}></div>
 
       <svg width={width} height={height} style={{ background: "#f9f9f9" }}>
-        {data.map((d, i) => (
-          <circle
-            key={i}
-            cx={xScale(d[xKey])}
-            cy={yScale(d[yKey])}
-            r={5}
-            fill={colors[d.species]}
-            opacity={0.8}
-          />
-        ))}
+        {data
+          .filter((d) => visibleSpecies[d.species])
+          .map((d, i) => (
+            <circle
+              key={i}
+              cx={xScale(d[xKey])}
+              cy={yScale(d[yKey])}
+              r={5}
+              fill={colors[d.species]}
+              opacity={0.8}
+            />
+          ))}
         <XAxis
           scale={xScale}
           height={height}
@@ -89,7 +104,11 @@ export default function ScatterPlot() {
       <div
         style={{ marginLeft: "1rem", display: "flex", alignItems: "center" }}
       >
-        <Legend />
+        <Legend
+          visibleSpecies={visibleSpecies}
+          toggleSpecies={toggleSpecies}
+          colors={colors}
+        />
       </div>
     </div>
   );
