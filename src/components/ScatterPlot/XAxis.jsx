@@ -1,4 +1,3 @@
-import React from "react";
 import { axisBottom } from "d3-axis";
 import { select } from "d3-selection";
 import { useEffect, useRef } from "react";

@@ -4,6 +4,7 @@ import { fetchIris } from "../../api";
 import AxisSelector from "./AxisSelector";
 import Legend from "./Legend";
 import XAxis from "./XAxis";
+import YAxis from "./YAxis";
 
 const width = 500;
 const height = 500;
@@ -61,6 +62,7 @@ export default function ScatterPlot() {
       </div>
 
       <div style={{ display: "flex" }}></div>
+
       <svg width={width} height={height} style={{ background: "#f9f9f9" }}>
         {data.map((d, i) => (
           <circle
@@ -77,6 +79,11 @@ export default function ScatterPlot() {
           height={height}
           label={xLabel}
           transform={`translate(0, ${height - padding})`}
+        />
+        <YAxis
+          scale={yScale}
+          label={yLabel}
+          transform={`translate(${padding}, 0)`}
         />
       </svg>
       <div
