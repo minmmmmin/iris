@@ -6,9 +6,9 @@ import Legend from "./Legend";
 import XAxis from "./XAxis";
 import YAxis from "./YAxis";
 
-const width = 500;
-const height = 500;
-const padding = 40;
+const width = 540;
+const height = 540;
+const padding = 60;
 
 const colors = {
   setosa: "#1f77b4",
@@ -76,7 +76,13 @@ export default function ScatterPlot() {
 
       <div style={{ display: "flex" }}></div>
 
-      <svg width={width} height={height} style={{ background: "#f9f9f9" }}>
+      <svg
+        width={width}
+        height={height}
+        style={{
+          background: "", // 中央寄せ！
+        }}
+      >
         {data
           .filter((d) => visibleSpecies[d.species])
           .map((d, i) => (
