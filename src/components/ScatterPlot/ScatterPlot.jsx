@@ -82,47 +82,53 @@ export default function ScatterPlot() {
         />
       </div>
 
-      <div style={{ display: "flex" }}></div>
-
-      <svg
-        width={width}
-        height={height}
+      <div
         style={{
-          background: "",
+          display: "flex",
+          alignItems: "flex-start",
+          marginLeft: "30px",
         }}
       >
-        {data
-          .filter((d) => visibleSpecies[d.species])
-          .map((d, i) => (
-            <circle
-              key={i}
-              className="scatter-dot"
-              cx={xScale(d[xKey])}
-              cy={yScale(d[yKey])}
-              r={5}
-              fill={colors[d.species]}
-            />
-          ))}
-        <XAxis
-          scale={xScale}
+        <svg
+          width={width}
           height={height}
-          label={xLabel}
-          transform={`translate(0, ${height - padding})`}
-        />
-        <YAxis
-          scale={yScale}
-          label={yLabel}
-          transform={`translate(${padding}, 0)`}
-        />
-      </svg>
-      <div
-        style={{ marginLeft: "1rem", display: "flex", alignItems: "center" }}
-      >
-        <Legend
-          visibleSpecies={visibleSpecies}
-          toggleSpecies={toggleSpecies}
-          colors={colors}
-        />
+          style={{
+            background: "",
+          }}
+        >
+          {data
+            .filter((d) => visibleSpecies[d.species])
+            .map((d, i) => (
+              <circle
+                key={i}
+                className="scatter-dot"
+                cx={xScale(d[xKey])}
+                cy={yScale(d[yKey])}
+                r={5}
+                fill={colors[d.species]}
+              />
+            ))}
+          <XAxis
+            scale={xScale}
+            height={height}
+            label={xLabel}
+            transform={`translate(0, ${height - padding})`}
+          />
+          <YAxis
+            scale={yScale}
+            label={yLabel}
+            transform={`translate(${padding}, 0)`}
+          />
+        </svg>
+        <div
+          style={{ marginLeft: "1rem", display: "flex", alignItems: "center" }}
+        >
+          <Legend
+            visibleSpecies={visibleSpecies}
+            toggleSpecies={toggleSpecies}
+            colors={colors}
+          />
+        </div>
       </div>
     </div>
   );
