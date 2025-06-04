@@ -5,6 +5,7 @@ import AxisSelector from "./AxisSelector";
 import Legend from "./Legend";
 import XAxis from "./XAxis";
 import YAxis from "./YAxis";
+import "../../CSS/ScatterPlot.css";
 
 const width = 540;
 const height = 540;
@@ -95,11 +96,11 @@ export default function ScatterPlot() {
           .map((d, i) => (
             <circle
               key={i}
+              className="scatter-dot"
               cx={xScale(d[xKey])}
               cy={yScale(d[yKey])}
               r={5}
               fill={colors[d.species]}
-              opacity={0.8}
             />
           ))}
         <XAxis
