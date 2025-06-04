@@ -45,6 +45,7 @@ export default function ScatterPlot() {
   const xKey = labelToKey[xLabel];
   const yKey = labelToKey[yLabel];
 
+  // ロード直後にユニークIDを付与しておく
   useEffect(() => {
     fetchIris().then((rawData) => {
       const dataWithId = rawData.map((d, i) => ({ ...d, id: i }));
@@ -62,6 +63,10 @@ export default function ScatterPlot() {
   const yScale = scaleLinear()
     .domain([Math.min(...yValues), Math.max(...yValues)])
     .range([height - padding, padding]);
+
+  if (data.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -99,18 +104,24 @@ export default function ScatterPlot() {
             background: "",
           }}
         >
-          {data
-            .filter((d) => visibleSpecies[d.species])
-            .map((d) => (
+          {data.map((d) => {
+            const isVisible = visibleSpecies[d.species];
+            return (
               <circle
-                key={d.id} // これが変わらなければアニメーションがスムーズに
+                key={d.id}
                 className="scatter-dot"
                 cx={xScale(d[xKey])}
                 cy={yScale(d[yKey])}
                 r={5}
                 fill={colors[d.species]}
+                style={{
+                  opacity: isVisible ? 0.8 : 0,
+                  transition: "opacity 0.8s ease",
+                }}
+                pointerEvents={isVisible ? "auto" : "none"}
               />
-            ))}
+            );
+          })}
 
           <XAxis
             scale={xScale}
