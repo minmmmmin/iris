@@ -3,6 +3,7 @@ import { scaleLinear } from "d3-scale";
 import { fetchIris } from "../../api";
 import AxisSelector from "./AxisSelector";
 import Legend from "./Legend";
+import XAxis from "./XAxis";
 
 const width = 500;
 const height = 500;
@@ -71,9 +72,16 @@ export default function ScatterPlot() {
             opacity={0.8}
           />
         ))}
+        <XAxis
+          scale={xScale}
+          height={height}
+          label={xLabel}
+          transform={`translate(0, ${height - padding})`}
+        />
       </svg>
       <div
-        style={{ marginLeft: "1rem", display: "flex", alignItems: "center" }}>
+        style={{ marginLeft: "1rem", display: "flex", alignItems: "center" }}
+      >
         <Legend />
       </div>
     </div>
