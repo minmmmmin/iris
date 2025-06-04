@@ -5,7 +5,7 @@ import AxisSelector from "./AxisSelector";
 import Legend from "./Legend";
 import XAxis from "./XAxis";
 import YAxis from "./YAxis";
-import "../../CSS/ScatterPlot.css";
+import "../../style/style.css";
 
 const width = 540;
 const height = 540;
