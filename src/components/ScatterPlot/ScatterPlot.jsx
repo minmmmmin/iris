@@ -46,7 +46,10 @@ export default function ScatterPlot() {
   const yKey = labelToKey[yLabel];
 
   useEffect(() => {
-    fetchIris().then(setData);
+    fetchIris().then((rawData) => {
+      const dataWithId = rawData.map((d, i) => ({ ...d, id: i }));
+      setData(dataWithId);
+    });
   }, []);
 
   const xValues = data.map((d) => d[xKey]);
@@ -98,9 +101,9 @@ export default function ScatterPlot() {
         >
           {data
             .filter((d) => visibleSpecies[d.species])
-            .map((d, i) => (
+            .map((d) => (
               <circle
-                key={`${d.species}-${d[xKey]}-${d[yKey]}-${i}`}
+                key={d.id} // これが変わらなければアニメーションがスムーズに
                 className="scatter-dot"
                 cx={xScale(d[xKey])}
                 cy={yScale(d[yKey])}
