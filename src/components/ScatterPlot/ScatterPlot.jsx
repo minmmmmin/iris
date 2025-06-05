@@ -7,8 +7,8 @@ import XAxis from "./XAxis";
 import YAxis from "./YAxis";
 import "../../style/style.css";
 
-const width = 540;
-const height = 540;
+const width = 500;
+const height = 500;
 const padding = 60;
 
 const colors = {
