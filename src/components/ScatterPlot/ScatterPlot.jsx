@@ -12,11 +12,12 @@ const height = 540;
 const padding = 60;
 
 const colors = {
-  setosa: "#ff6f91", // ピンクっぽい赤
-  versicolor: "#fcbf49", // 明るいオレンジイエロー
-  virginica: "#3da4ab", // 明るい青緑
+  setosa: "#ff6f91",
+  versicolor: "#fcbf49",
+  virginica: "#3da4ab",
 };
 
+// UIで選択する軸名をデータのキー名に変換
 const labelToKey = {
   "sepal length": "sepalLength",
   "sepal width": "sepalWidth",
@@ -25,34 +26,39 @@ const labelToKey = {
 };
 
 export default function ScatterPlot() {
+  // APIで取得したIrisデータを格納
   const [data, setData] = useState([]);
+  // 現在選ばれているX軸・Y軸のラベル
   const [xLabel, setXLabel] = useState("sepal length");
   const [yLabel, setYLabel] = useState("sepal width");
 
+  // 各品種が表示されるかどうかをブール値で保持
   const [visibleSpecies, setVisibleSpecies] = useState({
     setosa: true,
     versicolor: true,
     virginica: true,
   });
 
-  const toggleSpecies = (species) => {
-    setVisibleSpecies((prev) => ({
-      ...prev,
-      [species]: !prev[species],
-    }));
-  };
-
+  // 軸キーの決定
   const xKey = labelToKey[xLabel];
   const yKey = labelToKey[yLabel];
 
-  // ロード直後にユニークIDを付与しておく
+  // コンポーネント初回描画時にIrisデータを取得
   useEffect(() => {
-    fetchIris().then((rawData) => {
+    const loadData = async () => {
+      const rawData = await fetchIris();
       const dataWithId = rawData.map((d, i) => ({ ...d, id: i }));
       setData(dataWithId);
-    });
+    };
+    loadData();
   }, []);
 
+  // 万が一データがうまく取れなかった時
+  if (data.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  // スケールの計算
   const xValues = data.map((d) => d[xKey]);
   const yValues = data.map((d) => d[yKey]);
 
@@ -64,16 +70,36 @@ export default function ScatterPlot() {
     .domain([Math.min(...yValues), Math.max(...yValues)])
     .range([height - padding, padding]);
 
-  if (data.length === 0) {
-    return <div>Loading...</div>;
-  }
-  const options = [
-    "sepal length",
-    "sepal width",
-    "petal length",
-    "petal width",
-  ];
+  // 表示切り替え関数
+  const toggleSpecies = (species) => {
+    setVisibleSpecies((prev) => {
+      const updated = { ...prev };
+      updated[species] = !prev[species];
+      return updated;
+    });
+  };
 
+  // 軸ラベルの文字列
+  const options = Object.keys(labelToKey);
+
+  // データ点の生成
+  const scatterDots = data.map((d) => {
+    if (!visibleSpecies[d.species]) {
+      return null;
+    }
+    return (
+      <circle
+        key={d.id}
+        className="scatter-dot"
+        cx={xScale(d[xKey])}
+        cy={yScale(d[yKey])}
+        r={5}
+        fill={colors[d.species]}
+      />
+    );
+  });
+
+  // レンダリング
   return (
     <div>
       <div
@@ -105,27 +131,8 @@ export default function ScatterPlot() {
           marginLeft: "30px",
         }}
       >
-        <svg
-          width={width}
-          height={height}
-          style={{
-            background: "",
-          }}
-        >
-          {data.map((d) => {
-            const isVisible = visibleSpecies[d.species];
-            return (
-              <circle
-                key={d.id}
-                className={`scatter-dot ${!isVisible ? "hidden" : ""}`}
-                cx={xScale(d[xKey])}
-                cy={yScale(d[yKey])}
-                r={5}
-                fill={colors[d.species]}
-              />
-            );
-          })}
-
+        <svg width={width} height={height}>
+          {scatterDots}
           <XAxis
             scale={xScale}
             height={height}
@@ -138,6 +145,7 @@ export default function ScatterPlot() {
             transform={`translate(${padding}, 0)`}
           />
         </svg>
+
         <div
           style={{ marginLeft: "1rem", display: "flex", alignItems: "center" }}
         >
