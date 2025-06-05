@@ -73,7 +73,9 @@ export default function ScatterPlot() {
   // 表示切り替え関数
   const toggleSpecies = (species) => {
     setVisibleSpecies((prev) => {
+      // 現在の状態をコピー
       const updated = { ...prev };
+      // 該当の種だけ true/false を反転
       updated[species] = !prev[species];
       return updated;
     });
