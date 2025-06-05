@@ -84,13 +84,16 @@ export default function ScatterPlot() {
 
   // データ点の生成
   const scatterDots = data.map((d) => {
-    if (!visibleSpecies[d.species]) {
-      return null;
+    const isVisible = visibleSpecies[d.species];
+    let className = "scatter-dot";
+    if (!isVisible) {
+      className += " hidden";
     }
+
     return (
       <circle
         key={d.id}
-        className="scatter-dot"
+        className={className}
         cx={xScale(d[xKey])}
         cy={yScale(d[yKey])}
         r={5}
