@@ -1,6 +1,13 @@
 export default function Legend({ visibleSpecies, toggleSpecies, colors }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.5rem",
+        margin: "40px 0",
+      }}
+    >
       {Object.keys(visibleSpecies).map((species) => (
         <div
           key={species}
