@@ -104,18 +104,19 @@ export default function ScatterPlot() {
             background: "",
           }}
         >
-          {data
-            .filter((d) => visibleSpecies[d.species])
-            .map((d) => (
+          {data.map((d) => {
+            const isVisible = visibleSpecies[d.species];
+            return (
               <circle
                 key={d.id}
-                className="scatter-dot"
+                className={`scatter-dot ${!isVisible ? "hidden" : ""}`}
                 cx={xScale(d[xKey])}
                 cy={yScale(d[yKey])}
                 r={5}
                 fill={colors[d.species]}
               />
-            ))}
+            );
+          })}
 
           <XAxis
             scale={xScale}
