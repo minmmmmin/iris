@@ -92,6 +92,7 @@ export default function ScatterPlot() {
 
     return (
       <circle
+        // なんかkeyをiにするとミスった
         key={d.id}
         className={className}
         cx={xScale(d[xKey])}
