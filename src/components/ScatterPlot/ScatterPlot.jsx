@@ -67,6 +67,12 @@ export default function ScatterPlot() {
   if (data.length === 0) {
     return <div>Loading...</div>;
   }
+  const options = [
+    "sepal length",
+    "sepal width",
+    "petal length",
+    "petal width",
+  ];
 
   return (
     <div>
@@ -80,11 +86,13 @@ export default function ScatterPlot() {
       >
         <AxisSelector
           axisLabel="x property"
+          options={options}
           selected={xLabel}
           setSelected={setXLabel}
         />
         <AxisSelector
           axisLabel="y property"
+          options={options}
           selected={yLabel}
           setSelected={setYLabel}
         />
